@@ -6,13 +6,22 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-
-    <bean id="musicBean"
+<context:property-placeholder location="musicPlayer.properties"/>
+    <bean id="rapMusicBean"
           class="org.example.RapMusic">
-
     </bean>
 <bean id="musicPlayer"
 class="org.example.MusicPlayer">
-    <constructor-arg ref="musicBean"/>
-</bean>
+        <constructor-arg>
+            <list>
+                <ref bean="classicalMusicBean"/>
+                <ref bean="rockMusicBean"/>
+                <ref bean="rapMusicBean"/>
+            </list>
+        </constructor-arg>
+    </bean>
+    <bean id="classicalMusicBean"
+          class="org.example.ClassicalMusic"/>
+    <bean id="rockMusicBean"
+          class="org.example.RockMusic"/>
 </beans>
